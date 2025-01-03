@@ -8,7 +8,7 @@ use Spatie\Translatable\HasTranslations;
 
 use Illuminate\Validation\ValidationException;
 use Filament\Notifications\Notification;
-class Settings extends Model
+class Setting extends Model
 {
     use HasTranslations;
     use HasFactory;
@@ -17,7 +17,7 @@ class Settings extends Model
         'sitename' => 'array',
         'headerTitle' => 'array',
         'headerSubtitle' => 'array',
-        // 'contactus' => 'array',
+        'socialmedia' => 'array',
     ];
 
 
@@ -26,7 +26,7 @@ class Settings extends Model
         'sitename',
         'headerTitle',
         'headerSubtitle',
-        // 'contactus',
+        
     ];
 
 

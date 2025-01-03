@@ -1,26 +1,28 @@
 <?php
 
-namespace App\Filament\Resources\SettingsResource\Pages;
+namespace App\Filament\Resources\SettingResource\Pages;
 
-use App\Filament\Resources\SettingsResource;
+use App\Filament\Resources\SettingResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditSettings extends EditRecord
+class EditSetting extends EditRecord
 {
+    protected static string $resource = SettingResource::class;
+
     use EditRecord\Concerns\Translatable;
-    protected static string $resource = SettingsResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
             Actions\DeleteAction::make(),
             Actions\LocaleSwitcher::make(),
-        ];
-    }
 
+        ];
+    
+    }
     protected function getRedirectUrl(): string
     {
-        return  $this->getResource()::getUrl('index');
+         return  $this->getResource()::getUrl('index');
     }
 }

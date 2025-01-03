@@ -8,12 +8,15 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateExpert extends CreateRecord
 {
+    use CreateRecord\Concerns\Translatable;
+
     protected static string $resource = ExpertResource::class;
+
     protected function getRedirectUrl(): string
     {
          return  $this->getResource()::getUrl('index');
-        }
-        use CreateRecord\Concerns\Translatable;
+    }
+    
     protected function getHeaderActions(): array
     {
         return [

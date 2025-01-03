@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('settings', function (Blueprint $table) {
@@ -20,13 +22,13 @@ return new class extends Migration
             $table->text('footerBackground')->nullable();
             $table->text('footerLogo')->nullable();
             $table->text('socialmedia')->nullable();
-            $table->text('location')->nullable();
-            $table->text('contactus')->nullable();
             $table->timestamps();
         });
     }
 
-
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('settings');
