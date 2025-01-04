@@ -45,12 +45,22 @@ class Category extends Model
         return $this->hasMany(ExpertArticle::class, 'expert_id');
     }
 
-
-    // Start Lang Requiered Messag
+    
+    // Start Lang Requiered Message && Creating Default Order
 
     protected static function boot()
     {
         parent::boot();
+
+        // Create Default Order
+
+        static::creating(function ($category) {
+            if (is_null($category->order)) {
+                $category->order = Category::max('order') + 1;
+            }
+        });
+        
+        // Create Message
 
         static::saving(function ($model) {
 

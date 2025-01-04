@@ -1,5 +1,6 @@
 @php
     $setting = getsettings();
+
 @endphp
 <nav class="navbar navbar-expand-lg     py-0">
 
@@ -22,26 +23,24 @@
                                     <a class="nav-link my-3 active-nav-link " aria-current="page"
                                         href="{{route('home')}}">الرئيسية</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my-3 nav-unactive-link" href="./category.html">اتجاهات
-                                        ثقافية</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my-3 nav-unactive-link" href="./category.html">لقاءات
-                                        خاصة</a>
-                                </li>
+                                @foreach (getNavbarCategories()['firstThree'] as $category)
+                                    <li class="nav-item">
+                                        <a class="nav-link my-3 nav-unactive-link" href="./category.html">
+                                            {{$category->name}}
+                                        </a>
+                                    </li>
+                                @endforeach
                                 <li class="nav-item">
                                     <a class="nav-link my-3 nav-unactive-link" href="{{route('expertArticle')}}">آراء
                                         الخباراء </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my-3 nav-unactive-link" href="./category.html"> ركن
-                                        العروض</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link my-3 nav-unactive-link" href="./category.html"> الوسائط
-                                        المتعددة </a>
-                                </li>
+                                @foreach (getNavbarCategories()['lastTwo'] as $category)
+                                    <li class="nav-item">
+                                        <a class="nav-link my-3 nav-unactive-link" href="./category.html"> 
+                                            {{ $category->name }}
+                                        </a>
+                                    </li>
+                                @endforeach
                                 <li class="nav-item dropdown nav-unactive-link">
                                     <a class="nav-link dropdown-toggle nav-unactive-link" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -103,7 +102,7 @@
                 </div>
 
             </div>
-            <a class="navbar-brand col-md-4 col-6 d-flex justify-content-lg-center " href="./index.html"><img
+            <a class="navbar-brand col-md-4 col-6 d-flex justify-content-lg-center " href="{{route('home')}}"><img
                     class="nav-logo" src="{{ asset('storage/' . @$setting->logo) }}" alt="">
             </a>
             <div class=" row  col-4" id="navbarSupportedContent">
