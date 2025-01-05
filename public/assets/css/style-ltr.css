@@ -1,0 +1,113 @@
+.yellow-line {
+    /* border: 5px solid; */
+    height: 3px;
+    background: linear-gradient(270deg, #FAF9F6 0%, hwb(44 88% 0%) 40.9%, #F1E1BA 60.9%, #D49903 100%);
+    /* width:100%; */
+}
+
+/*!================================= Navbar Start */
+.serach-icon-nav {
+
+    right: 92%;
+}
+
+.search-bar-nav::placeholder {
+    margin-left: 10px !important;
+    padding-left: 40px;
+
+}
+
+@media(max-width:767px) {
+    .serach-icon-nav {
+        right: 91%;
+    }
+
+    .slider-caption {
+        padding-right: 0%;
+        padding-left: 25px;
+    }
+
+    .slide-title {
+        padding-right: 0px;
+        padding-left: 20px;
+    }
+    .read-more-btn
+    {
+        margin-left: 20px !important;
+        margin-top: 10px;
+
+    }
+}
+
+/*!================================= Navbar End */
+/* .master-title{
+    flex-direction: row-reverse;
+} */
+.active-nav-link::before {
+right: 10%;
+}
+/*&-------------------------------------------------- Carousel Start --> */
+.slide-img {
+    transform: scaleX(-1);
+}
+
+/*&-------------------------------------------------- Carousel end --> */
+.btn-prev {
+    right: -12px;
+}
+
+.btn-next {
+    left: -22px;
+}
+
+/*//-------------------------- Footer  Start------------------------------------------ */
+.serach-icon-footer {
+    right: 93%;
+}
+
+.search-bar-footer::placeholder {
+    padding-right: 0px;
+    padding-left: 40px;
+
+}
+
+.serach-btn-footer {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px
+}
+
+.search-bar-footer-2::placeholder {
+    padding-left: 30px;
+
+}
+
+.search-bar-footer:focus {
+    outline: none;
+}
+@media(max-width:767px)
+{
+    .serach-icon-footer {
+        right: 88%;
+    }
+    
+}
+/*//-------------------------- Footer  End------------------------------------------ */
+.copy-btn {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.link-share {
+
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid #dfdddd;
+    width: 100%;
+
+}

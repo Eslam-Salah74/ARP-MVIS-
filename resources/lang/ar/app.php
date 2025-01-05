@@ -8,6 +8,7 @@ return [
    'image' => 'الصورة',
    'slider' => 'السلايدر',
    'homepage' => 'الصفحة الرئيسية',
+   'What Next' => 'What Next',
    'video_link' => 'رابط الفيديو',
    'content' => 'المحتوى',
    'views' => 'عدد المشاهدات',
@@ -88,13 +89,16 @@ return [
    'Header Title'=>'العنوان في الهيدر',
    'Header Subtitle'=>'العنوان المصغر في الهيدر',
    'URL'=>'الرابط',
-   'Image In Header'=>'الايكون في الهيدر',
-   'Image In Footer'=>'الايكون في الفوتر',
+   'Icon In Header'=>'الايكون في الهيدر',
+   'Icon In Footer'=>'الايكون في الفوتر',
    'Logo'=>'الشعار',
+   'Sitename'=>'اسم الموقع',
    'Favicon'=>'الشعار المصغر',
    'Header Background'=>'صورة الخلفية في الهيدر',
    'Footer Background'=>'صورة الخلفية في الفوتر',
-
+   'featured_image'=>'الصورة الخارجية',
+    'Add Social Media'=>'اضافة وسيلة تواصل',
+    'Footer Logo'=>'اللوجو في الفوتر',
    // ===================WEB=================
 
    'Center for Intercultural Dialogue'=>' مركز حوار الثقافات',

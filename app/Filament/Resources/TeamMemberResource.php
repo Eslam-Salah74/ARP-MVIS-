@@ -13,7 +13,9 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Filters\SelectFilter;
@@ -79,32 +81,32 @@ class TeamMemberResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('department.name')
+                TextColumn::make('department.name')
                     ->numeric()
                     ->sortable()
                     ->label(__('app.department_name'))
 
                     ,
-                Tables\Columns\ImageColumn::make('image')
+                ImageColumn::make('image')
                 ->label(__('app.image'))
 
                 ,
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable()
                     ->label(__('app.name'))
 
                     ,
-                Tables\Columns\TextColumn::make('title')
+                TextColumn::make('title')
                 ->label(__('app.position'))
 
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->label(__('app.created_at'))
 
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
                     ->dateTime()
                     ->label(__('app.updated_at'))
 

@@ -1,18 +1,59 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Team\TeamController;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\ExpertArticle\ExpertArticleController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('welcome');
+
+// Route::get('/', function () {
+//     return view('pages.index');
+// });
+
+
+// Artisan Route
+Route::get('/clear-cache', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+    Artisan::call('route:clear');
+    Artisan::call('migrate');
+
+    return "Cache Cleared Successfully";
 });
+
+
+Route::get('/optimize-clear', function () {
+    Artisan::call('optimize:clear');
+
+    return "Optimize Cleared Successfully";
+});
+
+
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    return "Storage Linked";
+});
+
+
+/***** mcmara */
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+], function () {
+
+
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::get(LaravelLocalization::transRoute('routetrans.team'), [TeamController::class, 'index'])->name('team');
+    Route::get(LaravelLocalization::transRoute('routetrans.expertArticle'), [ExpertArticleController::class, 'index'])->name('expertArticle');
+    Route::get(LaravelLocalization::transRoute('routetrans.expertArticleDetails'), [ExpertArticleController::class, 'show'])->name('expertArticleDetails');
+
+
+
+
+
+});
+

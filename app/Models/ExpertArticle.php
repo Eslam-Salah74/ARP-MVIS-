@@ -10,9 +10,10 @@ use Spatie\Translatable\HasTranslations;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
 
-class ExpertArticle extends Model
+class ExpertArticle extends Model implements LocalizedUrlRoutable
 {
     use HasFactory,HasTranslations;
 
@@ -163,6 +164,17 @@ class ExpertArticle extends Model
         });
     }
 
-
+    function getLocalizedRouteKey($locale)
+	{
+		return $this->getTranslation('slug' , $locale);
+	}
+	public function getRouteKeyName()
+    {
+        return "slug";
+    }
+	public function resolveRouteBinding($slug, $field = NULL)
+	{
+		return static::where("slug->".app()->getLocale(), $slug)->first() ?? abort(404);
+	}
 
 }

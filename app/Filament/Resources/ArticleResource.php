@@ -160,14 +160,14 @@ class ArticleResource extends Resource
                             ->label(__('app.image'))
                             ->required(),
                     ]),
-                    // Wizard\Step::make('visabilaty')
-                    // ->label(__('filament.Visabilaty'))
-                    // ->schema([
-                    //     Toggle::make('slider')
-                    //         ->label(__('app.slider')),
-                    //     Toggle::make('homepage')
-                    //         ->label(__('app.homepage')),
-                    // ]),
+                    Wizard\Step::make('visabilaty')
+                    ->label(__('app.What Next'))
+                    ->schema([
+                        // Toggle::make('slider')
+                        //     ->label(__('app.slider')),
+                        Toggle::make('homepage')
+                            ->label(__('app.What Next')),
+                    ]),
 
                 ])->skippable(),
             ]),
@@ -209,13 +209,10 @@ class ArticleResource extends Resource
                     ->label(__('app.order'))
                     ->numeric()
                     ->sortable(),
-            // IconColumn::make('slider')
-            //         ->label(__('app.slider'))
-            //         ->boolean(),
 
-            // IconColumn::make('homepage')
-            //         ->label(__('app.homepage'))
-            //         ->boolean(),
+            IconColumn::make('homepage')
+                    ->label(__('app.What Next'))
+                    ->boolean(),
 
 
             TextColumn::make('created_at')
@@ -254,7 +251,7 @@ class ArticleResource extends Resource
                             $record->update([
                                 'category_id' => $data['category_id'],
                                 'author_id' => $data['author_id'],
-                                'slider' => $data['slider'],
+                                // 'slider' => $data['slider'],
                                 'homepage' => $data['homepage'],
                             ]);
                         }
@@ -277,8 +274,8 @@ class ArticleResource extends Resource
                         ->options(Author::all()->pluck('name', 'id'))
                             ->required(),
 
-                        Forms\Components\Toggle::make('slider')
-                            ->label(__('app.slider')),
+                        // Forms\Components\Toggle::make('slider')
+                        //     ->label(__('app.slider')),
 
                         Forms\Components\Toggle::make('homepage')
                             ->label(__('app.homepage')),

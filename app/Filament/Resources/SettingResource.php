@@ -12,8 +12,13 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Actions\DeleteAction;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Resources\Concerns\Translatable;
 use App\Filament\Resources\SettingResource\Pages;
@@ -53,41 +58,41 @@ class SettingResource extends Resource
                 Card::make()->schema([
                     TextInput::make('sitename')
                         ->required()
-                        ->label(__('app.sitename'))
+                        ->label(__('app.Sitename'))
                         ->maxLength(255),
                     TextInput::make('headerTitle')
                         ->required()
-                        ->label(__('app.headerTitle'))
+                        ->label(__('app.Header Title'))
                         ->maxLength(255),
                     TextInput::make('headerSubtitle')
                         ->required()
-                        ->label(__('app.headerSubtitle'))
+                        ->label(__('app.Header Subtitle'))
                         ->maxLength(255),
-                  
+
                     FileUpload::make('logo')
                         ->image()
                         ->required()
-                        ->label(__('app.logo')),
+                        ->label(__('app.Logo')),
 
                     FileUpload::make('favicon')
                         ->image()
                         ->required()
-                        ->label(__('app.favicon')),
+                        ->label(__('app.Favicon')),
 
                     FileUpload::make('headerBackground')
                         ->image()
                         ->required()
-                        ->label(__('app.headerBackground')),
+                        ->label(__('app.Header Background')),
 
                     FileUpload::make('footerBackground')
                         ->image()
                         ->required()
-                        ->label(__('app.footerBackground')),
+                        ->label(__('app.Footer Background')),
 
                     FileUpload::make('footerLogo')
                         ->image()
                         ->required()
-                        ->label(__('app.footerLogo')),
+                        ->label(__('app.Footer Logo')),
 
 
                     Repeater::make('socialmedia')
@@ -98,15 +103,15 @@ class SettingResource extends Resource
                             FileUpload::make('img1')
                                 ->image()
                                 ->required()
-                                ->label(__('app.img1')),
+                                ->label(__('app.Icon In Header')),
                             FileUpload::make('img2')
                                 ->image()
                                 ->required()
-                                ->label(__('app.img2')),
+                                ->label(__('app.Icon In Footer')),
                         ])
-                        ->collapsible() 
-                        ->createItemButtonLabel('Add Item') 
-                          
+                        ->collapsible()
+                        ->createItemButtonLabel('Add Social Media')
+
                 ]),
             ]);
     }
@@ -115,13 +120,24 @@ class SettingResource extends Resource
     {
         return $table
             ->columns([
-                //
-            ])
+                TextColumn::make('sitename')
+                    ->label(__('app.Sitename')) ,
+
+                ImageColumn::make('logo')
+                    ->label(__('app.Logo')),
+
+                ImageColumn::make('favicon')
+                    ->label(__('app.Favicon')),
+                ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    EditAction::make(),
+                    ViewAction::make(),
+                    DeleteAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -144,5 +160,13 @@ class SettingResource extends Resource
             'create' => Pages\CreateSetting::route('/create'),
             'edit' => Pages\EditSetting::route('/{record}/edit'),
         ];
+    }
+
+
+
+    //  لاخفاء زرار الاضافة بعد اضافه اول صف فى الداتا بيز
+    public static function canCreate(): bool
+    {
+        return Setting::count() === 0;
     }
 }
