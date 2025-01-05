@@ -13,220 +13,113 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-8 px-lg-4">
+            @if (@$articles)
+                <div class="col-lg-8 px-lg-4">
+                    @php
+                        $firstArticle = $articles->first();
+                        $otherArticles = $articles->skip(1)->paginate(2);
+                    @endphp
+                    <div class="large-card position-relative">
+                        <img class="large-card-img" src="{{asset('storage/'.@$firstArticle->featured_image)}}" alt="">
 
-                <div class="large-card position-relative">
-                    <img class="large-card-img" src="{{asset('assets/img/cards/med-card.png')}}" alt="">
+                        <div class=" card-cotent-ct z-1 position-absolute pt-3 px-3">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <a href="#" class="large-card-title mb-3">{{@$firstArticle->title}}</a>
 
-                    <div class=" card-cotent-ct z-1 position-absolute pt-3 px-3">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <a href="#" class="large-card-title mb-3">سيناريو مستبعد:</a>
+                            </div>
+                            <div class=" justify-content-between">
+                                <p class="sub-titles text-white">
+                                    {!! \Str::limit(@$firstArticle->subtitle, 70) !!}
+                                </p>
 
-                        </div>
-                        <div class=" justify-content-between">
-                            <p class="sub-titles text-white">
-                                هل تؤدي تعهدات روسيا بأمن السفن الأوكرانية لحل أزمة الغذاء العالمية؟ </p>
-
-                            <div class="d-flex justify-content- gap-2 align-items-center">
-                                <p class="card-small-text text-white">الحائط العربي</p>
-                                <p class="card-small-text text-white"> 25 مارس ، 2024 </p>
+                                <div class="d-flex justify-content- gap-2 align-items-center">
+                                    {{-- <p class="card-small-text text-white">الحائط العربي</p> --}}
+                                    <p class="card-small-text text-white"> {{ @$firstArticle->created_at->translatedFormat('j F, Y') }} </p>
+                                </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row mt-lg-4">
+                        @if (@$otherArticles)
+                            @foreach ($otherArticles as $article )
+                                <div class="med-card col-lg-4 col-md-6 my-4">
+                                    <a href="./article.html">
+                                        <img class="med-card-img" src="{{asset('storage/'.@$article->featured_image)}}" alt="">
+                                    </a>
+                                    <div class="bg-white pt-3 px-3 pb-3">
+                                        <a href="./article.html" class="card-label px-2 mb-2 py-1"> {{@$article->category->name}}</a>
+                                        <div class="d-flex justify-content-between align-items-start pt-1">
+                                            <a href="./article.html" class="large-card-title-med">{{@$article->title}}</a>
+
+                                        </div>
+                                        <p class="sub-titles" style="color:#757575">
+                                            {!! \Str::limit(@$article->subtitle, 70) !!}
+                                        </p>
+                                        <div class="d-flex justify-content  w-100">
+
+                                            <div class="d-flex w-100 justify-content- gap-2 align-items-center">
+                                                {{-- <p class="bold-cat mb-0 fw-bold">الحائط العربي</p> --}}
+                                                <p class="card-small-text mb-0">{{ @$article->created_at->translatedFormat('j F, Y') }} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                        {{-- <div class="pagination">
+                            <a href="#" class="prev"><img src="{{asset('assets/img/icons/paggin-arrow-left.svgg')}}" alt=""></a>
+                            <a href="#" class="page-num active current">1</a>
+                            <a href="#" class="page-num">2</a>
+                            <a href="#" class="page-num ">3</a>
+                            <a href="#" class="next"><img src="{{asset('assets/img/icons/paggin-arrow-left.svgg')}}" alt=""></a>
+                        </div> --}}
+                        {{ $otherArticles->links() }}
                     </div>
                 </div>
-
-                <div class="row mt-lg-4">
-
-                    <div class="med-card col-lg-4 col-md-6 my-4">
-                        <a href="./article.html">
-                            <img class="med-card-img" src="{{asset('assets/img/cards/three.png')}}" alt="">
-                        </a>
-                        <div class="bg-white pt-3 px-3 pb-3">
-                            <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a>
-                            <div class="d-flex justify-content-between align-items-start pt-1">
-                                <a href="./article.html" class="large-card-title-med">مسارات مفتوحة:</a>
-
-                            </div>
-                            <p class="sub-titles" style="color:#757575">
-                                الاتجاهات المحتملة للانتخابات المحلية في بلدية أنقرة
-                            </p>
-                            <div class="d-flex justify-content  w-100">
-
-                                <div class="d-flex w-100 justify-content- gap-2 align-items-center">
-                                    <p class="bold-cat mb-0 fw-bold">الحائط العربي</p>
-                                    <p class="card-small-text mb-0">25 مارس ، 2024</p>
-                                </div>
+            @endif
+            
+                    <div class="col-lg-4 ">
+                        
+                        <div class="d-flex gap-1 align-items-start pt-lg-0  py-2 ">
+                         
+                            <div>
+                                <h2 class="sec-headers  mb-2 py-0"> الاكثر قراءة</h2>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="pagination">
-                        <a href="#" class="prev"><img src="{{asset('assets/img/icons/paggin-arrow-left.svgg')}}" alt=""></a>
-                        <a href="#" class="page-num active current">1</a>
-                        <a href="#" class="page-num">2</a>
-                        <a href="#" class="page-num ">3</a>
-                        <a href="#" class="next"><img src="{{asset('assets/img/icons/paggin-arrow-left.svgg')}}" alt=""></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 ">
-                <!--~ section title  -->
-                <div class="d-flex gap-1 align-items-start pt-lg-0  py-2 ">
-                    <!-- <div class="yellow-col"> <img src="{{asset('assets/img/icons/yellow.svgg')}}" alt="">
-                    </div> -->
-                    <div>
-                        <h2 class="sec-headers  mb-2 py-0"> الاكثر قراءة</h2>
-                    </div>
-                </div>
-                <!--~ section title  End-->
 
-                <div class="small-cards-ct-in- d-flex flex-column mb-5">
-                    <div class="small-cards-interviews  pe-2 pt-0 mb-3 row">
-                        <div class="col-lg-4 col-5 px-0">
-                            <img src="{{asset('assets/img/cards/small.png')}}" class="small-cards-inter-img" alt="">
-                        </div>
-                        <div class="col-lg-8 col-7 px-2">
-                            <!-- <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a> -->
-                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="./article.html"
-                                    class="side-card-title">
-                                    الذكرى العشرون:
-                                </a>
-                                <span class="side-card-sub-title mt-3">
-                                    كيف تأثّر العراق جتماعياً بالغزو الأمريكي عام 2003؟
+                        <div class="small-cards-ct-in- d-flex flex-column mb-5">
+                            @if (@$topViews)
+                                @foreach (@$topViews as $topView)
+                                    <div class="small-cards-interviews  pe-2 pt-0 mb-3 row">
+                                        <div class="col-lg-4 col-5 px-0">
+                                            <img src="{{asset('storage/'.@$topView->featured_image)}}" class="small-cards-inter-img" alt="">
+                                        </div>
+                                        <div class="col-lg-8 col-7 px-2">
+                                            
+                                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="./article.html"
+                                                    class="side-card-title">
+                                                   {{@$topView->title}}
+                                                </a>
+                                                <span class="side-card-sub-title mt-3">
+                                                   {!! \Str::limit(@$topView->subtitle, 70) !!}
+                                                </span>
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex w-100  gap-2 align-items-center">
+                                                    {{-- <p class="card-small-text mb-0 fw-bold">الحائط العربي</p> --}}
+                                                    <p class="card-small-text mb-0">{{ @$topView->created_at->translatedFormat('j F, Y') }} </p>
+                                                </div>
 
-                                </span>
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex w-100  gap-2 align-items-center">
-                                    <p class="card-small-text mb-0 fw-bold">الحائط العربي</p>
-                                    <p class="card-small-text mb-0">25 مارس ، 2024 </p>
-                                </div>
-
-                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
-                    <div class="small-cards-interviews  pe-2 pt-0 mb-3 row">
-                        <div class="col-lg-4 col-5 px-0">
-                            <img src="{{asset('assets/img/cards/small.png')}}" class="small-cards-inter-img" alt="">
-                        </div>
-                        <div class="col-lg-8 col-7 px-2">
-                            <!-- <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a> -->
-                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="./article.html"
-                                    class="side-card-title">
-                                    الذكرى العشرون:
-                                </a>
-                                <span class="side-card-sub-title mt-3">
-                                    كيف تأثّر العراق جتماعياً بالغزو الأمريكي عام 2003؟
-
-                                </span>
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex w-100  gap-2 align-items-center">
-                                    <p class="card-small-text mb-0 fw-bold">الحائط العربي</p>
-                                    <p class="card-small-text mb-0">25 مارس ، 2024 </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="small-cards-interviews  pe-2 pt-0 mb-3 row">
-                        <div class="col-lg-4 col-5 px-0">
-                            <img src="{{asset('assets/img/cards/small.png')}}" class="small-cards-inter-img" alt="">
-                        </div>
-                        <div class="col-lg-8 col-7 px-2">
-                            <!-- <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a> -->
-                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="./article.html"
-                                    class="side-card-title">
-                                    الذكرى العشرون:
-                                </a>
-                                <span class="side-card-sub-title mt-3">
-                                    كيف تأثّر العراق جتماعياً بالغزو الأمريكي عام 2003؟
-
-                                </span>
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex w-100  gap-2 align-items-center">
-                                    <p class="card-small-text mb-0 fw-bold">الحائط العربي</p>
-                                    <p class="card-small-text mb-0">25 مارس ، 2024 </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="small-cards-interviews  pe-2 pt-0 mb-3 row">
-                        <div class="col-lg-4 col-5 px-0">
-                            <img src="{{asset('assets/img/cards/small.png')}}" class="small-cards-inter-img" alt="">
-                        </div>
-                        <div class="col-lg-8 col-7 px-2">
-                            <!-- <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a> -->
-                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="./article.html"
-                                    class="side-card-title">
-                                    الذكرى العشرون:
-                                </a>
-                                <span class="side-card-sub-title mt-3">
-                                    كيف تأثّر العراق جتماعياً بالغزو الأمريكي عام 2003؟
-
-                                </span>
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex w-100  gap-2 align-items-center">
-                                    <p class="card-small-text mb-0 fw-bold">الحائط العربي</p>
-                                    <p class="card-small-text mb-0">25 مارس ، 2024 </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="small-cards-interviews  pe-2 pt-0 mb-3 row">
-                        <div class="col-lg-4 col-5 px-0">
-                            <img src="{{asset('assets/img/cards/small.png')}}" class="small-cards-inter-img" alt="">
-                        </div>
-                        <div class="col-lg-8 col-7 px-2">
-                            <!-- <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a> -->
-                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="./article.html"
-                                    class="side-card-title">
-                                    الذكرى العشرون:
-                                </a>
-                                <span class="side-card-sub-title mt-3">
-                                    كيف تأثّر العراق جتماعياً بالغزو الأمريكي عام 2003؟
-
-                                </span>
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex w-100  gap-2 align-items-center">
-                                    <p class="card-small-text mb-0 fw-bold">الحائط العربي</p>
-                                    <p class="card-small-text mb-0">25 مارس ، 2024 </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="small-cards-interviews  pe-2 pt-0 mb-3 row">
-                        <div class="col-lg-4 col-5 px-0">
-                            <img src="{{asset('assets/img/cards/small.png')}}" class="small-cards-inter-img" alt="">
-                        </div>
-                        <div class="col-lg-8 col-7 px-2">
-                            <!-- <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a> -->
-                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="./article.html"
-                                    class="side-card-title">
-                                    الذكرى العشرون:
-                                </a>
-                                <span class="side-card-sub-title mt-3">
-                                    كيف تأثّر العراق جتماعياً بالغزو الأمريكي عام 2003؟
-
-                                </span>
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex w-100  gap-2 align-items-center">
-                                    <p class="card-small-text mb-0 fw-bold">الحائط العربي</p>
-                                    <p class="card-small-text mb-0">25 مارس ، 2024 </p>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                
 
 
 

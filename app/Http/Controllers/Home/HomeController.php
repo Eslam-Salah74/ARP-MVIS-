@@ -21,9 +21,10 @@ class HomeController extends Controller
     public function articlesByCategory(Category $articlesByCategory)
     {
 
-        $articles = $articlesByCategory->articles()->paginate(6);
+        $articles = $articlesByCategory->articles();
         // return  $articles;
-        return view('pages.Article.articleByCategory', compact('articlesByCategory', 'articles'));
+        $topViews      = Article::orderBy('views', 'desc')->take(6)->get();
+        return view('pages.Article.articleByCategory', compact('articlesByCategory', 'articles','topViews'));
     }
 
     public function show(Category $articlesByCategory, Article $articleDetails)

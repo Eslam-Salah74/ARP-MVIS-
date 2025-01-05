@@ -55,7 +55,7 @@
                                         <li><a class="dropdown-item" href="{{route('contactus')}}">تواصل معنا</a></li>
                                     </ul>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <div class="d-md-none d-flex gap-1 pt-2 align-items-start">
                                         <a class="nav-link d-flex align-items-start px-0 py-0" href="#"><img
                                                 height="20" src="{{asset('assets/img/icons/face.svg')}}" alt=""></a>
@@ -68,7 +68,7 @@
                                         <a class="nav-link d-flex align-items-start px-0 py-0" href="#"><img
                                                 height="20" src="{{asset('assets/img/icons/tiktok.svg')}}" alt=""></a>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>

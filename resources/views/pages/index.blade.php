@@ -152,7 +152,7 @@
                         <h2 class="main-headers  mb-4 py-0"> {{ @$category->name }}
                         </h2>
                         @if (@$category->articles->count() > 3)
-                            <a href="#" class="more-btn  py-0"> اقرأ المزيد <img class="mx-2"
+                            <a href="{{ route('articlesByCategory', $category->slug) }}" class="more-btn  py-0"> اقرأ المزيد <img class="mx-2"
                                     src="{{ asset('assets/img/icons/more-icn.svg') }}" alt="">
                             </a>
                         @endif
@@ -199,7 +199,7 @@
                         <h2 class="main-headers  mb-4 py-0"> {{ @$category->name }}
                         </h2>
                         @if (@$category->articles->count() > 4)
-                            <a href="#" class="more-btn  py-0"> اقرأ المزيد <img class="mx-2"
+                            <a href="{{ route('articlesByCategory', $category->slug) }}" class="more-btn  py-0"> اقرأ المزيد <img class="mx-2"
                                     src="{{ asset('assets/img/icons/more-icn.svg') }}" alt="">
                             </a>
                         @endif
@@ -294,7 +294,7 @@
                         class="d-flex  w-100 justify-content-between container-xxl px-lg-5 mt-4  align-items-center pt-2 mb-3 pb-0">
                         <h2 class="main-headers text-white  mb-4 py-0"> {{ @$category->name }}</h2>
                         @if (@$category->articles->count() > 3)
-                            <a href="#" class="more-btn text-white  py-0"> اقرأ المزيد <img class="mx-2"
+                            <a href="{{ route('articlesByCategory', $category->slug) }}" class="more-btn text-white  py-0"> اقرأ المزيد <img class="mx-2"
                                     src="{{ asset('assets/img/icons/more.svg') }}" alt="">
                             </a>
                         @endif
@@ -365,8 +365,8 @@
 
                             <div class="d-flex gap-2 w-100 justify-content-between align-items-center pt-2 mb-3 pb-0">
                                 <h2 class="main-headers  mb-4 py-0"> {{ @$category->name }}</h2>
-                                @if (@$category->articles->count() > 1)
-                                    <a href="#" class="more-btn  py-0"> اقرأ المزيد <img class="mx-2"
+                                @if (@$category->articles->count() > 3)
+                                    <a href="{{ route('articlesByCategory', $category->slug) }}" class="more-btn  py-0"> اقرأ المزيد <img class="mx-2"
                                             src="{{ asset('assets/img/icons/more-icn.svg') }}" alt="">
                                     </a>
                                 @endif
