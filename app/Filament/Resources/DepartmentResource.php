@@ -25,7 +25,7 @@ use App\Filament\Resources\DepartmentResource\RelationManagers;
 class DepartmentResource extends Resource
 {
     use Translatable;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $model = Department::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
@@ -150,7 +150,7 @@ class DepartmentResource extends Resource
             'index' => Pages\ListDepartments::route('/'),
             'create' => Pages\CreateDepartment::route('/create'),
             'view' => Pages\ViewDepartment::route('/{record}'),
-            'edit' => Pages\EditDepartment::route('/{record}/edit'),
+            'edit' => Pages\EditDepartment::route('/{record:id}/edit'),
         ];
     }
 }

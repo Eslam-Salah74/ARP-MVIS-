@@ -20,10 +20,11 @@ class Expert extends Model  implements LocalizedUrlRoutable
 
     protected $casts = [
         'name' => 'array',
+        'slug' => 'array',
     ];
 
     //Start Translation
-    public $translatable = ['name'];
+    public $translatable = ['name','slug'];
 
     public function getLocalizedName()
     {
@@ -90,5 +91,5 @@ class Expert extends Model  implements LocalizedUrlRoutable
 	{
 		return static::where("slug->".app()->getLocale(), $slug)->first() ?? abort(404);
 	}
-    
+
 }

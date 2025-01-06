@@ -18,84 +18,38 @@
             <div class="col-lg-3">
                 <div class="d-flex flex-column gap-2 justify-content- align-items-center  px-0">
                     <div class="d-flex align-items-center w-100 position-relative">
-                        <img class="circle-img-team" src="./assets/img/cards/special.png" alt="">
+                        <img class="circle-img-team" src="{{asset('storage/'.@$expertArticleDetails->expert->image)}}" alt="">
                         <div class=" position-absolute special-label  -0">
-                            <p class=" mb-0   px-3 py-2">حسين معلوم
+                            <p class=" mb-0   px-3 py-2">
+                                {{@$expertArticleDetails->expert->name}}
                             </p>
                         </div>
                     </div>
 
                 </div>
                 <div class="small-cards-ct-in-article d-flex flex-column">
-                    <div class="small-cards-in-article   px-3 d-flex flex-column justify-content-center">
-                        <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a>
-                        <p class="sub-titles mb-1"><a class="side-card-title" href="./article.html">دوافع سياسية :
-                            </a>سباب الإعلان عن
-                            إجراء
-                            انتخابات رئاسية مُبكرة في الجزائر</p>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
-                                <p class="card-small-text mb-0">حسين معلوم</p>
-                                <p class="card-small-text mb-0">25 مارس ، 2024 </p>
+                    @if(@$relatedArticles)
+                        @foreach ( $relatedArticles as  $articl)
+                            <div class="small-cards-in-article   px-3 d-flex flex-column justify-content-center">
+
+                                <a href="{{route('expertArticleDetails',@$articl->slug)}}" class="card-label px-2 mb-2 py-1"> {{@$articl->category->name}}</a>
+                                <p class="sub-titles mb-1"><a class="side-card-title" href="{{route('expertArticleDetails',@$articl->slug)}}"> {{@$articl->title}} :
+                                </a>
+                                {!! \Str::limit( @$articl->content,70 )!!}
+                                </p>
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
+                                        <p class="card-small-text mb-0"> {{@$articl->expert->name}}</p>
+                                        <p class="card-small-text mb-0">{{ @$articl->created_at->translatedFormat('j F, Y') }} </p>
+                                    </div>
+                                    <a href="#" class="custom-popUpOpen" data-link="{{ route('expertArticleDetails', @$articl->slug) }}">
+
+                                        <img src="{{asset('assets/img/icons/share.svg')}}" alt="">
+                                    </a>
+                                </div>
                             </div>
-                            <a href="#" class="custom-popUpOpen" data-link="https://yourwebsite.com/article-link">
-
-                                <img src="./assets/img/icons/share.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="small-cards-in-article   px-3  d-flex flex-column justify-content-center">
-                        <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a>
-                        <p class="sub-titles mb-1"><a class="side-card-title" href="./article.html">دوافع سياسية :
-                            </a>سباب الإعلان عن
-                            إجراء
-                            انتخابات رئاسية مُبكرة في الجزائر</p>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
-                                <p class="card-small-text mb-0">حسين معلوم</p>
-                                <p class="card-small-text mb-0"> 25 مارس ، 2024</p>
-                            </div>
-                            <a href="#" class="custom-popUpOpen" data-link="https://yourwebsite.com/article-link">
-
-                                <img src="./assets/img/icons/share.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="small-cards-in-article   px-3  d-flex flex-column justify-content-center">
-                        <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a>
-                        <p class="sub-titles mb-1"><a class="side-card-title" href="./article.html">دوافع سياسية :
-                            </a>سباب الإعلان عن
-                            إجراء
-                            انتخابات رئاسية مُبكرة في الجزائر</p>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
-                                <p class="card-small-text mb-0">حسين معلوم</p>
-                                <p class="card-small-text mb-0"> 25 مارس ، 2024</p>
-                            </div>
-                            <a href="#" class="custom-popUpOpen" data-link="https://yourwebsite.com/article-link">
-
-                                <img src="./assets/img/icons/share.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="small-cards-in-article   px-3  d-flex flex-column justify-content-center">
-                        <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a>
-                        <p class="sub-titles mb-1"><a class="side-card-title" href="./article.html">دوافع سياسية :
-                            </a>سباب الإعلان عن
-                            إجراء
-                            انتخابات رئاسية مُبكرة في الجزائر</p>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
-                                <p class="card-small-text mb-0">حسين معلوم</p>
-                                <p class="card-small-text mb-0">25 مارس ، 2024 </p>
-                            </div>
-                            <a href="#" class="custom-popUpOpen" data-link="https://yourwebsite.com/article-link">
-
-                                <img src="./assets/img/icons/share.svg" alt="">
-                            </a>
-                        </div>
-                    </div>
-
+                        @endforeach
+                    @endif
                 </div>
             </div>
             <div class="col-lg-9">
@@ -109,12 +63,12 @@
                                 <!-- <img class="author-avatar" src="./assets/img/icons/person.svg" alt=""> -->
                                 <div class="d-flex flex-column ">
                                     <!-- <p class="sub-titles mb-0">مركز الأبحاث المتقدمة</p> -->
-                                    <p class="card-small-text mb-0">{{ @$expertArticleDetails->created_at->format('F j, Y') }}</p>
+                                    <p class="card-small-text mb-0">{{ @$expertArticleDetails->created_at->translatedFormat('j F, Y') }}</p>
                                 </div>
                             </div>
-                            <a href="#" class="custom-popUpOpen" data-link="https://yourwebsite.com/article-link">
+                            <a href="#" class="custom-popUpOpen" data-link="{{ route('expertArticleDetails', @$expertArticleDetails->slug) }}">
 
-                                <img src="./assets/img/icons/share.svg" alt="">
+                                <img src="{{asset('assets/img/icons/share.svg')}}" alt="">
                             </a>
                         </div>
                         <div class="article-contetnt-ct">

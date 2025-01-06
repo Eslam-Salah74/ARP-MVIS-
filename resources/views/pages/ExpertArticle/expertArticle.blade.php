@@ -8,93 +8,60 @@
                 </h2>
 
             </div>
-@if(@$experts)
-    @foreach ($experts as $expert)
-        <div class="col-lg-4 col-md-6 single-opinion px-3 mb-4">
-            <div class=" gap-2 justify-content-center align-items-center specialist-card px-0">
-                <div class="d-flex align-items-center">
-                    <img class="circle-img" src="{{asset('storage/'.@$expert->image)}}" alt="">
-                </div>
-                <div class="special-links py-3 px-2">
-                    @if(@$expert->experts_articles)
-                        @foreach ($expert->experts_articles as  $artical)
-                            <a href="{{route('expertArticleDetails',@$artical->slug)}}" class="side-card-title mb-0 special-p"> {{@$artical->title}} </a>
-                        @endforeach
-                    @endif
-                    <a href="./special.html" class="card-small-text text-black mb-0 mt-2"> {{@$expert->name}} </a>
-                </div>
-            </div>
+            @if (@$expertArticle)
+                @foreach ($expertArticle as $article)
+                    <div class="col-lg-4 col-md-6 single-opinion px-3 mb-4">
+                        <div class=" gap-2 justify-content-center align-items-center specialist-card px-0">
+                            <div class="d-flex align-items-center">
+                                <img class="circle-img" src="{{ asset('storage/' . @$article->expert->image) }}"
+                                    alt="">
+                            </div>
+                            <div class="special-links py-3 px-2">
+                                <a href="{{ route('expertArticleDetails', @$article->slug) }}"
+                                    class="side-card-title mb-0 special-p"> {{ @$article->title }}
+                                </a>
+                                <a href="{{ route('expertProfile', @$article->expert->slug) }}"
+                                    class="card-small-text text-black mb-0 mt-2"> {{ @$article->expert->name }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
-    @endforeach
-@endif
-        </div>
+
         <div class="col-lg-3 ">
-            <!--~ section title  -->
             <div class="d-flex gap-1 align-items-start py-2 ">
-                <!-- <div class="yellow-col"> <img src="./assets/img/icons/yellow.svg" alt="">
-                </div> -->
                 <div>
                     <h2 class="sec-headers  mb-2 py-0"> الاكثر قراءة</h2>
                 </div>
             </div>
-            <!--~ section title  End-->
-
             <div class="small-cards-ct-in-cat d-flex flex-column mb-5">
+                @if (@$topViews)
+                    @foreach ($topViews as $topView)
+                        <div class="small-cards pb-3 pt-3 px-3  d-flex flex-column justify-content-center">
+                            <a href="{{route('expertArticleDetails',@$topView->slug)}}" class="card-label px-2 mb-2 py-1"> {{ @$topView->category->name }}:</a>
+                            <p class="sub-titles mb-1"><a class="side-card-title" href="{{route('expertArticleDetails',@$topView->slug)}}"> {{ @$topView->title }} :
+                                </a>
+                                {!! \Str::limit( @$topView->content,70 )!!}
 
-                <div class="small-cards pb-3 pt-3 px-3  d-flex flex-column justify-content-center">
-                    <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a>
-                    <p class="sub-titles mb-1"><a class="side-card-title" href="./article.html">دوافع سياسية : </a>سباب
-                        الإعلان عن
-                        إجراء
-                        انتخابات رئاسية مُبكرة في الجزائر</p>
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
-                            <p class="card-small-text mb-0">حسين معلوم</p>
-                            <p class="card-small-text mb-0">25 مارس ، 2024 </p>
+                                </p>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
+                                    <p class="card-small-text mb-0"> {{@$topView->expert->name}}</p>
+                                    <p class="card-small-text mb-0">{{ @$topView->created_at->translatedFormat('j F, Y') }} </p>
+                                </div>
+                                <a href="#" class="custom-popUpOpen" data-link="{{ route('expertArticleDetails', @$topView->slug) }}">
+
+                                    <img src="{{asset('assets/img/icons/share.svg')}}" alt="">
+                                </a>
+                            </div>
                         </div>
-                        <a href="#" class="custom-popUpOpen" data-link="https://yourwebsite.com/article-link">
-
-                            <img src="./assets/img/icons/share.svg" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="small-cards pb-3 pt-3 px-3  d-flex flex-column justify-content-center">
-                    <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a>
-                    <p class="sub-titles mb-1"><a class="side-card-title" href="./article.html">دوافع سياسية : </a>سباب
-                        الإعلان عن
-                        إجراء
-                        انتخابات رئاسية مُبكرة في الجزائر</p>
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
-                            <p class="card-small-text mb-0">حسين معلوم</p>
-                            <p class="card-small-text mb-0"> 25 مارس ، 2024</p>
-                        </div>
-                        <a href="#" class="custom-popUpOpen" data-link="https://yourwebsite.com/article-link">
-
-                            <img src="./assets/img/icons/share.svg" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="small-cards pb-3 pt-3 px-3  d-flex flex-column justify-content-center">
-                    <a href="./article.html" class="card-label px-2 mb-2 py-1">مسارات مفتوحة:</a>
-                    <p class="sub-titles mb-1"><a class="side-card-title" href="./article.html">دوافع سياسية : </a>سباب
-                        الإعلان عن
-                        إجراء
-                        انتخابات رئاسية مُبكرة في الجزائر</p>
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex w-100  gap-2 align-items-center justify-content-between pe-5">
-                            <p class="card-small-text mb-0">حسين معلوم</p>
-                            <p class="card-small-text mb-0"> 25 مارس ، 2024</p>
-                        </div>
-                        <a href="#" class="custom-popUpOpen" data-link="https://yourwebsite.com/article-link">
-
-                            <img src="./assets/img/icons/share.svg" alt="">
-                        </a>
-                    </div>
-                </div>
-
+                    @endforeach
+                @endif
             </div>
         </div>
+
     </div>
 
     <!--& share pop up start-->
@@ -115,9 +82,8 @@
             <a class="share-icon-ct" href="#" target="_blank"><i class="share-icons bi bi-messenger"></i></a>
             <a class="share-icon-ct" href="#" target="_blank"><i class="share-icons bi bi-whatsapp"></i></a>
             <a class="share-icon-ct" href="#" target="_blank"><i class="share-icons bi bi-instagram"></i></a>
-            <a class="share-icon-ct" href="#" target="_blank"><svg class="twit"
-                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-twitter-x" viewBox="0 0 16 16">
+            <a class="share-icon-ct" href="#" target="_blank"><svg class="twit" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
                     <path
                         d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
                 </svg></a>

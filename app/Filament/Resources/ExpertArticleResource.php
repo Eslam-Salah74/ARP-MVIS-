@@ -35,7 +35,7 @@ use App\Filament\Resources\ExpertArticleResource\RelationManagers;
 class ExpertArticleResource extends Resource
 {
     use Translatable;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $model = ExpertArticle::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
@@ -200,7 +200,7 @@ class ExpertArticleResource extends Resource
         return [
             'index' => Pages\ListExpertArticles::route('/'),
             'create' => Pages\CreateExpertArticle::route('/create'),
-            'edit' => Pages\EditExpertArticle::route('/{record}/edit'),
+            'edit' => Pages\EditExpertArticle::route('/{record:id}/edit'),
         ];
     }
 }

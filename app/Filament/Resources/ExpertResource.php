@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Illuminate\Support\Collection;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Hidden;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
@@ -28,7 +29,7 @@ class ExpertResource extends Resource
 {
     use Translatable;
     protected static ?string $model = Expert::class;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $navigationIcon = 'heroicon-o-pencil-square';
     public static function getNavigationGroup(): ?string
     {
@@ -55,9 +56,21 @@ class ExpertResource extends Resource
             ->schema([
                 Card::make()->schema([
                     TextInput::make('name')
-                        ->required()
                         ->label(__('app.name'))
-                        ->maxLength(255),
+                        ->required()
+                        ->unique()
+                        ->live(onBlur: true)
+                        ->afterStateUpdated(function (?string $state, callable $set) {
+                            if ($state) {
+                                $slug = preg_replace('/\s+/u', '-', trim($state));
+                                $slug = preg_replace('/[^\p{Arabic}\p{L}\p{N}\-]+/u', '', $slug);
+                                $set('slug', $slug);
+                            }
+                        }),
+
+                    Hidden::make('slug')
+                        ->label(__('Slug'))
+                        ->required(),
                     FileUpload::make('image')
                         ->image()
                         ->required()
@@ -121,7 +134,7 @@ class ExpertResource extends Resource
 
                             if ($deleted > 0) {
                                 Notification::make()
-                                    ->title(__('app.success'))
+                                    ->name(__('app.success'))
                                     ->body(__('app.deleted_successfully', ['count' => $deleted]))
                                     ->success()
                                     ->send();
@@ -129,7 +142,7 @@ class ExpertResource extends Resource
 
                             if ($skipped > 0) {
                                 Notification::make()
-                                    ->title(__('app.warning'))
+                                    ->name(__('app.warning'))
                                     ->body(__('app.skipped_due_to_related_content', ['count' => $skipped]))
                                     ->warning()
                                     ->send();
@@ -151,7 +164,7 @@ class ExpertResource extends Resource
         return [
             'index' => Pages\ListExperts::route('/'),
             'create' => Pages\CreateExpert::route('/create'),
-            'edit' => Pages\EditExpert::route('/{record}/edit'),
+            'edit' => Pages\EditExpert::route('/{record:id}/edit'),
         ];
     }
 }

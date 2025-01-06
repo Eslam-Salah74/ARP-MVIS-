@@ -28,7 +28,7 @@ use App\Filament\Resources\AuthorResource\RelationManagers;
 class AuthorResource extends Resource
 {
     use Translatable;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $model = Author::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-circle';
@@ -157,7 +157,7 @@ class AuthorResource extends Resource
         return [
             'index' => Pages\ListAuthors::route('/'),
             'create' => Pages\CreateAuthor::route('/create'),
-            'edit' => Pages\EditAuthor::route('/{record}/edit'),
+            'edit' => Pages\EditAuthor::route('/{record:id}/edit'),
         ];
     }
 }

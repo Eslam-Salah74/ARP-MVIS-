@@ -45,7 +45,7 @@ use App\Filament\Resources\ArticleResource\RelationManagers;
 class ArticleResource extends Resource
 {
     use Translatable;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $model = Article::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
@@ -298,7 +298,7 @@ class ArticleResource extends Resource
         return [
             'index' => Pages\ListArticles::route('/'),
             'create' => Pages\CreateArticle::route('/create'),
-            'edit' => Pages\EditArticle::route('/{record}/edit'),
+            'edit' => Pages\EditArticle::route('/{record:id}/edit'),
         ];
     }
 }

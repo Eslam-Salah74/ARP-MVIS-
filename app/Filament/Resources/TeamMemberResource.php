@@ -28,7 +28,7 @@ use App\Filament\Resources\TeamMemberResource\RelationManagers;
 class TeamMemberResource extends Resource
 {
     use Translatable;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $model = TeamMember::class;
     public static function getNavigationGroup(): ?string
     {
@@ -150,7 +150,7 @@ class TeamMemberResource extends Resource
         return [
             'index' => Pages\ListTeamMembers::route('/'),
             'create' => Pages\CreateTeamMember::route('/create'),
-            'edit' => Pages\EditTeamMember::route('/{record}/edit'),
+            'edit' => Pages\EditTeamMember::route('/{record:id}/edit'),
         ];
     }
 }

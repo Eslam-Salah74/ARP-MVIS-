@@ -99,6 +99,17 @@ return [
    'featured_image'=>'الصورة الخارجية',
     'Add Social Media'=>'اضافة وسيلة تواصل',
     'Footer Logo'=>'اللوجو في الفوتر',
+    'Contact'=>'تواصل معنا',
+    'Contact'=>'تواصل معنا',
+
+    'Phones'=>'ارقام الهاتف',
+    'Add Phone'=>'اضافة رقم',
+    'Address'=>'العنوان',
+    'addressAr'=>'العنواب باللغة العربية',
+    'addressEn'=>'العنوان باللغة الانجليزية',
+    'Add Address'=>'اضافة عنوان',
+    'Email'=>'البريد الالكتروني',
+   'Add Email'=>'اضافة بريد الكتروني',
    // ===================WEB=================
 
    'Center for Intercultural Dialogue'=>' مركز حوار الثقافات',

@@ -30,7 +30,7 @@ use App\Filament\Resources\AboutResource\RelationManagers;
 class AboutResource extends Resource
 {
     use Translatable;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $model = About::class;
     public static function getNavigationGroup(): ?string
     {
@@ -173,7 +173,7 @@ public static function getModelLabel(): string
         return [
             'index' => Pages\ListAbouts::route('/'),
             'create' => Pages\CreateAbout::route('/create'),
-            'edit' => Pages\EditAbout::route('/{record}/edit'),
+            'edit' => Pages\EditAbout::route('/{record:id}/edit'),
         ];
     }
 

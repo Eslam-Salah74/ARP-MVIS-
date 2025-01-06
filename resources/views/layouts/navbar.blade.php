@@ -1,3 +1,6 @@
+@php
+    $setting = getsettings();
+@endphp
 <nav class="navbar navbar-expand-lg     py-0">
 
     <div class="container-fluid bg-white d-flex flex-column p-0 py-3">
@@ -17,7 +20,7 @@
                                 class=" me-auto gap-lg-2 list-unstyled container-xxl px-lg5 mx-auto mb-2 mb-lg-0 col-lg-10">
                                 <li class="nav-item">
                                     <a class="nav-link my-3 active-nav-link " aria-current="page"
-                                        href="./index.html">الرئيسية</a>
+                                        href="{{route('home')}}">الرئيسية</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link my-3 nav-unactive-link" href="./category.html">اتجاهات
@@ -28,7 +31,7 @@
                                         خاصة</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link my-3 nav-unactive-link" href="./specialists.html">آراء
+                                    <a class="nav-link my-3 nav-unactive-link" href="{{route('expertArticle')}}">آراء
                                         الخباراء </a>
                                 </li>
                                 <li class="nav-item">
@@ -45,12 +48,12 @@
                                         من نحن
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="./about.html">عن الموقع</a></li>
+                                        <li><a class="dropdown-item" href="{{route('aboutus')}}">عن الموقع</a></li>
                                         <li><a class="dropdown-item" href="{{route('team')}}"> فريق العمل</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="./contact.html">تواصل معنا</a></li>
+                                        <li><a class="dropdown-item" href="{{route('contactus')}}">تواصل معنا</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item">

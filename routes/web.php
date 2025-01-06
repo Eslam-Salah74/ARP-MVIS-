@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Team\TeamController;
+use App\Http\Controllers\Aboutus\AboutusController;
+use App\Http\Controllers\Contactus\ContactusController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\ExpertArticle\ExpertArticleController;
 
@@ -48,8 +50,11 @@ Route::group([
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::get(LaravelLocalization::transRoute('routetrans.team'), [TeamController::class, 'index'])->name('team');
+    Route::get(LaravelLocalization::transRoute('routetrans.aboutus'), [AboutusController::class, 'index'])->name('aboutus');
+    Route::get(LaravelLocalization::transRoute('routetrans.contactus'), [ContactusController::class, 'index'])->name('contactus');
     Route::get(LaravelLocalization::transRoute('routetrans.expertArticle'), [ExpertArticleController::class, 'index'])->name('expertArticle');
     Route::get(LaravelLocalization::transRoute('routetrans.expertArticleDetails'), [ExpertArticleController::class, 'show'])->name('expertArticleDetails');
+    Route::get(LaravelLocalization::transRoute('routetrans.expertProfile'), [ExpertArticleController::class, 'profile'])->name('expertProfile');
 
 
 

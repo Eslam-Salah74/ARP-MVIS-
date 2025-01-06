@@ -28,13 +28,14 @@ use App\Filament\Resources\SettingResource\RelationManagers;
 class SettingResource extends Resource
 {
     use Translatable;
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $model = Setting::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-8-tooth';
 
     public static function getNavigationGroup(): ?string
     {
-        return __('app.Settings');
+        return __('app.Setting');
     }
 
     public static function getNavigationSort(): ?int
@@ -158,7 +159,7 @@ class SettingResource extends Resource
         return [
             'index' => Pages\ListSettings::route('/'),
             'create' => Pages\CreateSetting::route('/create'),
-            'edit' => Pages\EditSetting::route('/{record}/edit'),
+            'edit' => Pages\EditSetting::route('/{record:id}/edit'),
         ];
     }
 

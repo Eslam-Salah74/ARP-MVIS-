@@ -29,7 +29,7 @@ use App\Filament\Resources\CategoryResource\RelationManagers;
 class CategoryResource extends Resource
 {
     use Translatable;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
@@ -175,7 +175,7 @@ class CategoryResource extends Resource
         return [
             'index' => Pages\ListCategories::route('/'),
             'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'edit' => Pages\EditCategory::route('/{record:id}/edit'),
         ];
     }
 }

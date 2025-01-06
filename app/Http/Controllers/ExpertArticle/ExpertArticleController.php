@@ -11,15 +11,41 @@ class ExpertArticleController extends Controller
 {
     public function index()
     {
-        $experts = Expert::with('experts_articles')->get();
-
-        return view('pages.ExpertArticle.expertArticle',compact('experts'));
+        $expertArticle = ExpertArticle::with('expert')->get();
+        $topViews = ExpertArticle::orderBy('views', 'desc')->take(3)->get();
+        return view('pages.ExpertArticle.expertArticle',compact('expertArticle','topViews'));
     }
+
 
 
     public function show(ExpertArticle $expertArticleDetails)
     {
-        return view('pages.ExpertArticle.expertArticleDetails',compact('expertArticleDetails'));
+        $expertArticleDetails->increment('views');
+
+        $relatedArticles = ExpertArticle::where('expert_id', $expertArticleDetails->expert_id)
+                                        ->where('id', '!=', $expertArticleDetails->id) // ما عدا المقال المعروض
+                                        ->get();
+
+        return view('pages.ExpertArticle.expertArticleDetails', compact('expertArticleDetails', 'relatedArticles'));
     }
+
+
+
+
+    public function profile(Expert $expertProfile)
+    {
+
+        $relatedArticles = ExpertArticle::where('expert_id', $expertProfile->id)->paginate(3);
+        $topViews = ExpertArticle::orderBy('views', 'desc')->take(3)->get();
+        return view('pages.ExpertArticle.expertProfile',compact('expertProfile','relatedArticles','topViews'));
+    }
+
+
+
+
+
+
+
+
 
 }

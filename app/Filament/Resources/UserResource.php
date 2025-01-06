@@ -23,7 +23,7 @@ class UserResource extends Resource
 {
 
     protected static ?string $model = User::class;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $navigationLabel = 'Users';
@@ -135,7 +135,7 @@ class UserResource extends Resource
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
             'view' => Pages\ViewUser::route('/{record}'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'edit' => Pages\EditUser::route('/{record:id}/edit'),
         ];
     }
 }

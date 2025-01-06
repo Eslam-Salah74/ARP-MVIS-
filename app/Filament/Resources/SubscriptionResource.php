@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class SubscriptionResource extends Resource
 {
     protected static ?string $model = Subscription::class;
-
+    protected static ?string $recordRouteKeyName = 'id';
     protected static ?string $navigationIcon = 'heroicon-s-ticket';
     public static function getNavigationGroup(): ?string
     {
@@ -89,7 +89,7 @@ class SubscriptionResource extends Resource
         return [
             'index' => Pages\ListSubscriptions::route('/'),
             // 'create' => Pages\CreateSubscription::route('/create'),
-            // 'edit' => Pages\EditSubscription::route('/{record}/edit'),
+            // 'edit' => Pages\EditSubscription::route('/{record:id}/edit'),
         ];
     }
 }

@@ -103,6 +103,17 @@ return [
    'featured_image'=>'featured_image',
    'Add Social Media'=>'Add Social Media',
    'Footer Logo'=>'Footer Logo',
+   'Contact'=>'Contact',
+
+
+   'Phones'=>'Phones',
+   'Email'=>'Email',
+   'Add Email'=>'Add Email',
+    'Add Phone'=>'Add Phone',
+    'Address'=>'Address',
+    'addressAr'=>'Address (Ar)',
+    'addressEn'=>'Address (En)',
+    'Add Address'=>'Add Address',
 
     // ===================WEB=================
 
