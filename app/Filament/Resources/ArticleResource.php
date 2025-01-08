@@ -11,8 +11,9 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 
-use Filament\Resources\Resource;
+use App\Events\ArticlePublished;
 
+use Filament\Resources\Resource;
 use Illuminate\Support\Collection;
 use Filament\Forms\Components\Card;
 use Filament\Tables\Actions\Action;
@@ -20,8 +21,8 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Wizard;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Actions\BulkAction;
 use Filament\Tables\Actions\EditAction;
@@ -300,5 +301,17 @@ class ArticleResource extends Resource
             'create' => Pages\CreateArticle::route('/create'),
             'edit' => Pages\EditArticle::route('/{record:id}/edit'),
         ];
+    }
+
+    public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        // هنا يمكنك إضافة أي تعديل على البيانات قبل الحفظ
+        return $data;
+    }
+
+    public static function afterCreate($record): void
+    {
+        // إطلاق الحدث بعد إنشاء المقال
+        event(new ArticlePublished($record));
     }
 }
