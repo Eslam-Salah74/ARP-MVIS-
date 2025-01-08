@@ -25,7 +25,7 @@
                                 </li>
                                 @foreach (getNavbarCategories()['firstThree'] as $category)
                                     <li class="nav-item">
-                                        <a class="nav-link my-3 nav-unactive-link" href="./category.html">
+                                        <a class="nav-link my-3 nav-unactive-link" href="{{ route('articlesByCategory', $category->slug) }}">
                                             {{$category->name}}
                                         </a>
                                     </li>
@@ -36,7 +36,7 @@
                                 </li>
                                 @foreach (getNavbarCategories()['lastTwo'] as $category)
                                     <li class="nav-item">
-                                        <a class="nav-link my-3 nav-unactive-link" href="./category.html"> 
+                                        <a class="nav-link my-3 nav-unactive-link" href="{{ route('articlesByCategory', $category->slug) }}">
                                             {{ $category->name }}
                                         </a>
                                     </li>

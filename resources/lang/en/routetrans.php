@@ -8,5 +8,9 @@ return [
    'expertArticle'=>'expertArticle',
    'expertArticleDetails'=>'expertArticle/{expertArticleDetails}',
    'expertProfile'=>'{expertProfile}',
+   'allcat'=>'allcat',
+   'articlesByCategory' => 'allcat/{articlesByCategory}',
+   'articleDetails' => 'allcat/{articlesByCategory}/{articleDetails}'
+
 
 ];

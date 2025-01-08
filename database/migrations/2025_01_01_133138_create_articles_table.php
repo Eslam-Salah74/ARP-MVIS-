@@ -17,14 +17,14 @@ return new class extends Migration
             $table->foreignId('author_id')->nullable()->constrained('authors')->cascadeOnDelete();
             $table->string('title')->unique()->nullable();
             $table->string('slug');
-            $table->string('subtitle')->nullable();
+            $table->text('subtitle')->nullable();
             $table->string('featured_image')->nullable();
             $table->string('image')->nullable();
             $table->text('summary')->nullable();
             $table->longText('content')->nullable();
             $table->integer('views')->default(0);
-            $table->boolean('homepage')->default(0);
-            $table->integer('order')->nullable();
+            // $table->boolean('whatNext')->default(0);
+            // $table->integer('order')->nullable();
             $table->timestamps();
         });
     }

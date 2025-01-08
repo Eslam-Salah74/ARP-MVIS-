@@ -14,8 +14,8 @@ use App\Models\Setting;
 
     function getNavbarCategories()
     {
-    
-        $categories = Category::orderByRaw('CASE WHEN `order` IS NULL THEN `id` ELSE `order` END')->get();
+
+        $categories = Category::whereHas('articles')->orderByRaw('CASE WHEN `order` IS NULL THEN `id` ELSE `order` END')->get();
         $firstThree = $categories->take(3);
         $lastTwo = $categories->skip(3);
 

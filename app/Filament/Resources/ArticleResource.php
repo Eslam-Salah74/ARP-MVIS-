@@ -160,14 +160,14 @@ class ArticleResource extends Resource
                             ->label(__('app.image'))
                             ->required(),
                     ]),
-                    Wizard\Step::make('visabilaty')
-                    ->label(__('app.What Next'))
-                    ->schema([
-                        // Toggle::make('slider')
-                        //     ->label(__('app.slider')),
-                        Toggle::make('homepage')
-                            ->label(__('app.What Next')),
-                    ]),
+                    // Wizard\Step::make('visabilaty')
+                    // ->label(__('app.What Next'))
+                    // ->schema([
+                    //     // Toggle::make('slider')
+                    //     //     ->label(__('app.slider')),
+                    //     Toggle::make('homepage')
+                    //         ->label(__('app.What Next')),
+                    // ]),
 
                 ])->skippable(),
             ]),
@@ -178,16 +178,16 @@ class ArticleResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->reorderable('order')
+        // ->reorderable('order')
 
-        ->defaultSort('order', 'asc')
-        ->headerActions([
-            Tables\Actions\Action::make('export')
-                ->label(__('app.Export excel'))  // The button label
-                ->icon('heroicon-o-arrow-down-on-square')  // Optional icon
-                // ->url(route('export-articles'))  // Call the export route
-                ->openUrlInNewTab(),  // Optional: To open in a new tab
-        ])
+        // ->defaultSort('order', 'asc')
+        // ->headerActions([
+        //     Tables\Actions\Action::make('export')
+        //         ->label(__('app.Export excel'))  // The button label
+        //         ->icon('heroicon-o-arrow-down-on-square')  // Optional icon
+        //         // ->url(route('export-articles'))  // Call the export route
+        //         ->openUrlInNewTab(),  // Optional: To open in a new tab
+        // ])
         ->columns([
             TextColumn::make('title')
             ->label(__('app.title'))
@@ -205,14 +205,14 @@ class ArticleResource extends Resource
                     ->label(__('app.views'))
                     ->numeric()
                     ->sortable(),
-            TextColumn::make('order')
-                    ->label(__('app.order'))
-                    ->numeric()
-                    ->sortable(),
+            // TextColumn::make('order')
+            //         ->label(__('app.order'))
+            //         ->numeric()
+            //         ->sortable(),
 
-            IconColumn::make('homepage')
-                    ->label(__('app.What Next'))
-                    ->boolean(),
+            // IconColumn::make('homepage')
+            //         ->label(__('app.What Next'))
+            //         ->boolean(),
 
 
             TextColumn::make('created_at')
@@ -277,8 +277,8 @@ class ArticleResource extends Resource
                         // Forms\Components\Toggle::make('slider')
                         //     ->label(__('app.slider')),
 
-                        Forms\Components\Toggle::make('homepage')
-                            ->label(__('app.homepage')),
+                        // Forms\Components\Toggle::make('homepage')
+                        //     ->label(__('app.homepage')),
 
                     ]),
                 Tables\Actions\DeleteBulkAction::make(),

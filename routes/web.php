@@ -56,6 +56,8 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routetrans.expertArticleDetails'), [ExpertArticleController::class, 'show'])->name('expertArticleDetails');
     Route::get(LaravelLocalization::transRoute('routetrans.expertProfile'), [ExpertArticleController::class, 'profile'])->name('expertProfile');
 
+    Route::get(LaravelLocalization::transRoute('routetrans.articlesByCategory'), [HomeController::class, 'articlesByCategory'])->name('articlesByCategory');
+    Route::get(LaravelLocalization::transRoute('routetrans.articleDetails'), [HomeController::class, 'show'])->name('articleDetails');
 
 
 

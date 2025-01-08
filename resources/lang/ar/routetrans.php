@@ -9,4 +9,8 @@ return [
     'expertArticle'=>'اراء_الكتاب',
     'expertArticleDetails'=>'اراء_الكتاب/{expertArticleDetails}',
     'expertProfile'=>'{expertProfile}',
+    'allcat'=>'allcat',
+    'articlesByCategory' => 'allcat/{articlesByCategory}',
+    'articleDetails' => 'allcat/{articlesByCategory}/{articleDetails}'
+
 ];

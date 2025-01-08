@@ -12,7 +12,7 @@ class ExpertArticleController extends Controller
     public function index()
     {
         $expertArticle = ExpertArticle::with('expert')->get();
-        $topViews = ExpertArticle::orderBy('views', 'desc')->take(3)->get();
+        $topViews      = ExpertArticle::orderBy('views', 'desc')->take(3)->get();
         return view('pages.ExpertArticle.expertArticle',compact('expertArticle','topViews'));
     }
 

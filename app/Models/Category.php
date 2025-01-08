@@ -10,8 +10,9 @@ use Spatie\Translatable\HasTranslations;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
-class Category extends Model
+class Category extends Model implements LocalizedUrlRoutable
 {
     use HasFactory,HasTranslations;
 
@@ -19,11 +20,12 @@ class Category extends Model
 
     protected $casts = [
         'name' => 'json',
+        'slug' => 'json',
     ];
 
     //Start Translation
 
-    public $translatable = ['name','Slug'];
+    public $translatable = ['name','slug'];
 
     public function getLocalizedName()
     {
@@ -45,7 +47,7 @@ class Category extends Model
         return $this->hasMany(ExpertArticle::class, 'expert_id');
     }
 
-    
+
     // Start Lang Requiered Message && Creating Default Order
 
     protected static function boot()
@@ -59,7 +61,7 @@ class Category extends Model
                 $category->order = Category::max('order') + 1;
             }
         });
-        
+
         // Create Message
 
         static::saving(function ($model) {
@@ -110,6 +112,20 @@ class Category extends Model
 
         });
     }
+
+
+    function getLocalizedRouteKey($locale)
+	{
+		return $this->getTranslation('slug' , $locale);
+	}
+	public function getRouteKeyName()
+    {
+        return "slug";
+    }
+	public function resolveRouteBinding($slug, $field = NULL)
+	{
+		return static::where("slug->".app()->getLocale(), $slug)->first() ?? abort(404);
+	}
 
 
 }
