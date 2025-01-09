@@ -18,20 +18,5 @@ class HomeController extends Controller
         return view('pages.index',compact('categories'));
     }
 
-    public function articlesByCategory(Category $articlesByCategory)
-    {
-
-        $articles = $articlesByCategory->articles();
-        // return  $articles;
-        $topViews      = Article::orderBy('views', 'desc')->take(6)->get();
-        return view('pages.Article.articleByCategory', compact('articlesByCategory', 'articles','topViews'));
-    }
-
-    public function show(Category $articlesByCategory, Article $articleDetails)
-    {
-        // زيادة عدد المشاهدات للمقالة
-        $articleDetails->increment('views');
-
-        return view('pages.Article.articleDetails',compact('articlesByCategory','articleDetails') );
-    }
+    
 }

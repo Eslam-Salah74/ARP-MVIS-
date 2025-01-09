@@ -21,7 +21,7 @@
                                 class=" me-auto gap-lg-2 list-unstyled container-xxl px-lg5 mx-auto mb-2 mb-lg-0 col-lg-10">
                                 <li class="nav-item">
                                     <a class="nav-link my-3 active-nav-link " aria-current="page"
-                                        href="{{route('home')}}">الرئيسية</a>
+                                        href="{{route('home')}}"> {{ trans('Home') }} </a>
                                 </li>
                                 @foreach (getNavbarCategories()['firstThree'] as $category)
                                     <li class="nav-item">
@@ -31,8 +31,9 @@
                                     </li>
                                 @endforeach
                                 <li class="nav-item">
-                                    <a class="nav-link my-3 nav-unactive-link" href="{{route('expertArticle')}}">آراء
-                                        الخباراء </a>
+                                    <a class="nav-link my-3 nav-unactive-link" href="{{route('expertArticle')}}">
+                                        {{ trans('main.Expert opinions') }}
+                                     </a>
                                 </li>
                                 @foreach (getNavbarCategories()['lastTwo'] as $category)
                                     <li class="nav-item">
@@ -44,15 +45,15 @@
                                 <li class="nav-item dropdown nav-unactive-link">
                                     <a class="nav-link dropdown-toggle nav-unactive-link" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        من نحن
+                                         {{ trans('main.About Us') }}
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{route('aboutus')}}">عن الموقع</a></li>
-                                        <li><a class="dropdown-item" href="{{route('team')}}"> فريق العمل</a></li>
+                                        <li><a class="dropdown-item" href="{{route('aboutus')}}"> {{ trans('main.About Us') }}</a></li>
+                                        <li><a class="dropdown-item" href="{{route('team')}}">  {{ trans('main.Our Team') }}</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="{{route('contactus')}}">تواصل معنا</a></li>
+                                        <li><a class="dropdown-item" href="{{route('contactus')}}"> {{ trans('main.Contact Us') }} </a></li>
                                     </ul>
                                 </li>
                                 {{-- <li class="nav-item">

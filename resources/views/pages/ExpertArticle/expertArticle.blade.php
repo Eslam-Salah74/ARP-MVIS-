@@ -1,10 +1,51 @@
 @extends('layouts.app')
 
+
+
+@php
+    $setting = getsettings();
+@endphp
+@if (@$expertArticle)
+
+    @section('meta_description')
+        {!! \Str::limit(strip_tags(@$expertArticle[0]['content']), 160) !!}
+    @endsection
+
+@endif
+
+@if ($setting && $setting->sitename != null)
+    @section('og_title', @$setting->sitename . ' | ' .trans('main.Expert opinions') )
+@endif
+
+@if (@$expertArticle)
+    @section('og_description')
+        {{ \Str::limit(strip_tags(@$expertArticle[0]['content']), 160) }}
+    @endsection
+@endif
+
+@if (@$expertArticle)
+    @section('og_image')
+        {{ request()->root() . '/storage/' .@$expertArticle[0]->expert->image }}
+    @endsection
+@endif
+
+@section('og_url', url()->current())
+
+@section('og_type', 'website')
+
+@if ($setting && $setting->sitename != null)
+    @section('title', @$setting->sitename . ' | ' .trans('main.Expert opinions') )
+@endif
+
+
+
+
 @section('content')
     <div class="container-xxl mx-auto row my-5">
         <div class="container-xxl mx-auto px-lg-4 px-3 row gap-0 col-lg-9 single-opinion">
             <div class="d-flex gap-2 w-100 justify-content-between align-items-center pt-2 mb- pb-0">
-                <h2 class="main-headers  mb-4 py-0"> آراء الكتاب
+                <h2 class="main-headers  mb-4 py-0">
+                    {{ trans('main.Expert opinions') }}
                 </h2>
 
             </div>
@@ -33,7 +74,7 @@
         <div class="col-lg-3 ">
             <div class="d-flex gap-1 align-items-start py-2 ">
                 <div>
-                    <h2 class="sec-headers  mb-2 py-0"> الاكثر قراءة</h2>
+                    <h2 class="sec-headers  mb-2 py-0"> {{ trans('main.Most read') }} </h2>
                 </div>
             </div>
             <div class="small-cards-ct-in-cat d-flex flex-column mb-5">

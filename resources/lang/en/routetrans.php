@@ -6,11 +6,12 @@ return [
    'aboutus'=>'aboutus',
    'contactus'=>'contactus',
    'expertArticle'=>'expertArticle',
+   'subscribe'=>'subscribe',
    'expertArticleDetails'=>'expertArticle/{expertArticleDetails}',
    'expertProfile'=>'{expertProfile}',
    'allcat'=>'allcat',
    'articlesByCategory' => 'allcat/{articlesByCategory}',
-   'articleDetails' => 'allcat/{articlesByCategory}/{articleDetails}'
+   'articleDetails' => 'articlesByCategory/{articleDetails}'
 
 
 ];

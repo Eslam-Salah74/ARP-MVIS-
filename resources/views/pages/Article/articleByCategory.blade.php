@@ -1,5 +1,49 @@
 @extends('layouts.app')
 
+
+@php
+    // $firstArticle = $articles->first();
+    // $otherArticles = $articles->skip(1)->paginate(2);
+    $setting = getsettings();
+@endphp
+@if (@$firstArticle)
+
+    @section('meta_description')
+        {!! \Str::limit(strip_tags(@$firstArticle->subtitle), 160) !!}
+    @endsection
+
+@endif
+
+@if ($setting && $setting->sitename != null)
+    @section('og_title', @$setting->sitename . ' | ' .@$articlesByCategory->name )
+@endif
+
+@if (@$firstArticle)
+    @section('og_description')
+        {{ \Str::limit(strip_tags(@$firstArticle->subtitle), 160) }}
+    @endsection
+@endif
+
+@if (@$firstArticle)
+    @section('og_image')
+        {{ request()->root() . '/storage/' .@$firstArticle->featured_image }}
+    @endsection
+@endif
+
+@section('og_url', url()->current())
+
+@section('og_type', 'website')
+
+@if ($setting && $setting->sitename != null)
+    @section('title', @$setting->sitename . ' | ' .@$articlesByCategory->name )
+@endif
+
+
+
+
+
+
+
 @section('content')
 
 
@@ -15,16 +59,14 @@
         <div class="row">
             @if (@$articles)
                 <div class="col-lg-8 px-lg-4">
-                    @php
-                        $firstArticle = $articles->first();
-                        $otherArticles = $articles->skip(1)->paginate(2);
-                    @endphp
+
                     <div class="large-card position-relative">
                         <img class="large-card-img" src="{{asset('storage/'.@$firstArticle->featured_image)}}" alt="">
 
                         <div class=" card-cotent-ct z-1 position-absolute pt-3 px-3">
                             <div class="d-flex justify-content-between align-items-start">
-                                <a href="#" class="large-card-title mb-3">{{@$firstArticle->title}}</a>
+
+                                <a href="{{route('articleDetails',@$firstArticle->slug)}}" class="large-card-title mb-3">{{@$firstArticle->title}}</a>
 
                             </div>
                             <div class=" justify-content-between">
@@ -44,13 +86,13 @@
                         @if (@$otherArticles)
                             @foreach ($otherArticles as $article )
                                 <div class="med-card col-lg-4 col-md-6 my-4">
-                                    <a href="./article.html">
+                                    <a href="{{route('articleDetails',@$article->slug)}}">
                                         <img class="med-card-img" src="{{asset('storage/'.@$article->featured_image)}}" alt="">
                                     </a>
                                     <div class="bg-white pt-3 px-3 pb-3">
-                                        <a href="./article.html" class="card-label px-2 mb-2 py-1"> {{@$article->category->name}}</a>
+                                        <a href="{{route('articleDetails',@$article->slug)}}" class="card-label px-2 mb-2 py-1"> {{@$article->category->name}}</a>
                                         <div class="d-flex justify-content-between align-items-start pt-1">
-                                            <a href="./article.html" class="large-card-title-med">{{@$article->title}}</a>
+                                            <a href="{{route('articleDetails',@$article->slug)}}" class="large-card-title-med">{{@$article->title}}</a>
 
                                         </div>
                                         <p class="sub-titles" style="color:#757575">
@@ -78,13 +120,13 @@
                     </div>
                 </div>
             @endif
-            
+
                     <div class="col-lg-4 ">
-                        
+
                         <div class="d-flex gap-1 align-items-start pt-lg-0  py-2 ">
-                         
+
                             <div>
-                                <h2 class="sec-headers  mb-2 py-0"> الاكثر قراءة</h2>
+                                <h2 class="sec-headers  mb-2 py-0">  {{ trans('main.Most read') }} </h2>
                             </div>
                         </div>
 
@@ -97,8 +139,8 @@
                                             <img src="{{asset('storage/'.@$topView->featured_image)}}" class="small-cards-inter-img" alt="">
                                         </div>
                                         <div class="col-lg-8 col-7 px-2">
-                                            
-                                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="./article.html"
+
+                                            <p class="sub-titles pe-0 mb-0 d-flex flex-column"><a href="{{route('articleDetails',@$topView->slug)}}"
                                                     class="side-card-title">
                                                    {{@$topView->title}}
                                                 </a>
@@ -119,7 +161,7 @@
                             @endif
                         </div>
                     </div>
-                
+
 
 
 

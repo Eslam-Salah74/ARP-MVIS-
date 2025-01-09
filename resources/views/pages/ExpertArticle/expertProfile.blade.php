@@ -3,6 +3,42 @@
 @section('content')
 
 
+@php
+    $setting = getsettings();
+@endphp
+@if (@$expertProfile)
+
+    @section('meta_description')
+        {!! \Str::limit(strip_tags(@$expertProfile->experts_articles[0]['content']), 160) !!}
+    @endsection
+
+@endif
+
+@if ($setting && $setting->sitename != null)
+    @section('og_title', @$setting->sitename . ' | ' . @$expertProfile->name)
+@endif
+
+@if (@$expertProfile)
+    @section('og_description')
+        {!! \Str::limit(strip_tags(@$expertProfile->experts_articles[0]['content']), 160) !!}
+    @endsection
+@endif
+
+@if (@$expertProfile)
+    @section('og_image')
+        {{ request()->root() . '/storage/' .@$expertProfile->image }}
+    @endsection
+@endif
+
+@section('og_url', url()->current())
+
+@section('og_type', 'website')
+
+@if ($setting && $setting->sitename != null)
+    @section('title', @$setting->sitename . ' | ' .@$expertProfile->name)
+@endif
+
+
     <div class="container-xxl mx-auto row my-5 px-lg-5 row px-3">
 
         <div class="container-xxl mx-auto  row gap-0 col-lg-8 single-opinion">
@@ -54,6 +90,7 @@
                                 </div>
                             @endforeach
                         @endif
+                        {{-- {{ $relatedArticles->links() }} --}}
                     </div>
                 </div>
             </div>
@@ -64,7 +101,7 @@
             <div class="d-flex gap-1 align-items-start py-2 ">
 
                 <div>
-                    <h2 class="sec-headers  mb-2 py-0"> الاكثر قراءة</h2>
+                    <h2 class="sec-headers  mb-2 py-0">  {{ trans('main.Most read') }} </h2>
                 </div>
             </div>
             <!--~ section title  End-->

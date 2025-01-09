@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Team\TeamController;
 use App\Http\Controllers\Aboutus\AboutusController;
+use App\Http\Controllers\Article\ArticleController;
 use App\Http\Controllers\Contactus\ContactusController;
+use App\Http\Controllers\Subscriber\SubscriberController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\ExpertArticle\ExpertArticleController;
 
@@ -52,12 +54,13 @@ Route::group([
     Route::get(LaravelLocalization::transRoute('routetrans.team'), [TeamController::class, 'index'])->name('team');
     Route::get(LaravelLocalization::transRoute('routetrans.aboutus'), [AboutusController::class, 'index'])->name('aboutus');
     Route::get(LaravelLocalization::transRoute('routetrans.contactus'), [ContactusController::class, 'index'])->name('contactus');
+    Route::post(LaravelLocalization::transRoute('routetrans.subscribe'), [SubscriberController::class, 'store'])->name('subscribe');
     Route::get(LaravelLocalization::transRoute('routetrans.expertArticle'), [ExpertArticleController::class, 'index'])->name('expertArticle');
     Route::get(LaravelLocalization::transRoute('routetrans.expertArticleDetails'), [ExpertArticleController::class, 'show'])->name('expertArticleDetails');
     Route::get(LaravelLocalization::transRoute('routetrans.expertProfile'), [ExpertArticleController::class, 'profile'])->name('expertProfile');
 
-    Route::get(LaravelLocalization::transRoute('routetrans.articlesByCategory'), [HomeController::class, 'articlesByCategory'])->name('articlesByCategory');
-    Route::get(LaravelLocalization::transRoute('routetrans.articleDetails'), [HomeController::class, 'show'])->name('articleDetails');
+    Route::get(LaravelLocalization::transRoute('routetrans.articlesByCategory'), [ArticleController::class, 'articlesByCategory'])->name('articlesByCategory');
+    Route::get(LaravelLocalization::transRoute('routetrans.articleDetails'), [ArticleController::class, 'show'])->name('articleDetails');
 
 
 

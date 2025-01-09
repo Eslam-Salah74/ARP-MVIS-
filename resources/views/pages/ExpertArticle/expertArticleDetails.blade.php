@@ -1,5 +1,45 @@
 @extends('layouts.app')
 
+
+
+@php
+    $setting = getsettings();
+@endphp
+@if (@$expertArticleDetails)
+
+    @section('meta_description')
+        {!! \Str::limit(strip_tags(@$expertArticleDetails->content), 160) !!}
+    @endsection
+
+@endif
+
+@if ($setting && $setting->sitename != null)
+    @section('og_title', @$setting->sitename . ' | ' . @$expertArticleDetails->title)
+@endif
+
+@if (@$expertArticleDetails)
+    @section('og_description')
+        {{ \Str::limit(strip_tags(@$expertArticleDetails->content), 160) }}
+    @endsection
+@endif
+
+@if (@$expertArticleDetails)
+    @section('og_image')
+        {{ request()->root() . '/storage/' .@$expertArticleDetails->expert->image }}
+    @endsection
+@endif
+
+@section('og_url', url()->current())
+
+@section('og_type', 'website')
+
+@if ($setting && $setting->sitename != null)
+    @section('title', @$setting->sitename . ' | ' .@$expertArticleDetails->title)
+@endif
+
+
+
+
 @section('content')
 
 
@@ -8,9 +48,9 @@
         <div class="row">
             <!-- breadcramp Start -->
             <div class="d-flex justify-content- card-small-text  gap-2 align-items-center mb-3">
-                <p class="bread-cramp mb-0">مركز الأبحاث المتقدمة</p>
+                <a href="{{route('home')}}" class="bread-cramp mb-0"> {{trans('main.Home')}}</a>
                 <p class="bread-cramp  mb-0">/</p>
-                <p class="bread-cramp mb-0">مركز الأبحاث المتقدمة</p>
+                <p class="bread-cramp mb-0">  {{@$expertArticleDetails->title}}</p>
             </div>
             <!-- breadcramp End -->
             <div class="d-flex gap-2 align-items-center py-2 ">

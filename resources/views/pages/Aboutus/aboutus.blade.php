@@ -1,21 +1,60 @@
 @extends('layouts.app')
 
+
+@php
+    $setting = getsettings();
+@endphp
+@if (@$aboutUs)
+
+    @section('meta_description')
+        {!! \Str::limit(strip_tags(@$aboutUs->content1), 160) !!}
+    @endsection
+
+@endif
+
+@if ($setting && $setting->sitename != null)
+    @section('og_title', @$setting->sitename . ' | ' .trans('main.About Us'))
+@endif
+
+@if (@$aboutUs)
+    @section('og_description')
+        {{ \Str::limit(strip_tags(@$aboutUs->content2), 160) }}
+    @endsection
+@endif
+
+@if (@$aboutUs)
+    @section('og_image')
+        {{ request()->root() . '/storage/' . $aboutUs->image }}
+    @endsection
+@endif
+
+@section('og_url', url()->current())
+
+@section('og_type', 'website')
+
+@if ($setting && $setting->sitename != null)
+    @section('title', @$setting->sitename . ' | ' .trans('main.About Us'))
+@endif
+
+
+
+
 @section('content')
     @if (@$aboutUs)
         <section class="container-xxl mx-auto  wow fadeInUp  px-lg-5 px-4 my-lg-5">
             <div class="row">
                 <!-- breadcramp Start -->
                 <div class="d-flex justify-content- card-small-text  gap-2 align-items-center mb-3">
-                    <p class="bread-cramp mb-0">مركز الأبحاث المتقدمة</p>
+                    <a href="{{route('home')}}" class="bread-cramp mb-0">{{ trans('main.Home') }}</a>
                     <p class="bread-cramp  mb-0">/</p>
-                    <p class="bread-cramp mb-0"> عن الموقع </p>
+                    <p class="bread-cramp mb-0">  {{ trans('main.About Us') }} </p>
                 </div>
                 <!-- breadcramp End -->
 
                 <div class=" row col-lg-7">
 
                     <div class="gap-2 w-100 pt-2 mb-3 pb-0">
-                        <h2 class="main-headers  mb-4 py-0"> من نحن</h2>
+                        <h2 class="main-headers  mb-4 py-0"> {{ trans('main.About Us') }}</h2>
                         <p class="side-card-sub-title mt-3">
                             {!! @$aboutUs->content1 !!}
                         </p>
@@ -58,15 +97,17 @@
 
                     <div class="container mx-auto">
                         <div class="mt-5">
-                            <h2 class="main-headers  mb-5 py-0 fs-3"> اشترك في النشرة الإخبارية
+                            <h2 class="main-headers  mb-5 py-0 fs-3"> {{ trans('main.Subscribe to our newsletter') }}
                             </h2>
 
-                            <form class="d-flex search-input-ct search-input-ct-footer w-0 mt-3" role="search">
-                                <input class="search-bar-footer-2 me-2 w-100 ps-2" type="text"
-                                    placeholder="البريد الالكتروني" aria-label="Search">
-                                <button class="serach-btn-footer end-0" src="./assets/img/icons/search-wh.svg"
-                                    alt="">اشترك
-                                    الآن</button>
+                            <form action="{{ route('subscribe') }}" method="POST" class="d-flex search-input-ct search-input-ct-footer w-0 mt-3">
+                                @csrf
+                                <input class="search-bar-footer-2 me-2 w-100 ps-2" type="email" name="email" type="text"
+                                    placeholder=" {{ trans('main.Email') }} " aria-label="Search">
+                                <button type="submit" class="serach-btn-footer end-0" src="./assets/img/icons/search-wh.svg"
+                                    alt="">
+                                    {{ trans('main.Subscribe now') }}
+                                </button>
                                 <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
                             </form>
                         </div>

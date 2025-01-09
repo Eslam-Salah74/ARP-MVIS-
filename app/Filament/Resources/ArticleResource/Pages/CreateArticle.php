@@ -2,21 +2,24 @@
 
 namespace App\Filament\Resources\ArticleResource\Pages;
 
-use App\Filament\Resources\ArticleResource;
 use Filament\Actions;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
 use App\Models\Article;
 use Illuminate\Support\Str;
+use App\Events\ArticlePublished;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\ArticleResource;
+
 class CreateArticle extends CreateRecord
 {
     protected static string $resource = ArticleResource::class;
+    use CreateRecord\Concerns\Translatable;
+
     protected function getRedirectUrl(): string
     {
          return  $this->getResource()::getUrl('index');
-        }   
-        use CreateRecord\Concerns\Translatable;
+    }
     protected function getHeaderActions(): array
     {
         return [
@@ -25,25 +28,16 @@ class CreateArticle extends CreateRecord
         ];
     }
 
-//     public function submit()
-// {
-//     $formState = $this->form->getState();
-//     $title = $formState['title'];
-//     $slug = Str::slug($title);
 
-//     // Check if the slug already exists
-//     $exists = Article::where('slug', $slug)->exists();
+    // protected function handleRecordCreation(array $data): Article
+    // {
 
-//     if ($exists) {
-//         Notification::make()
-//             ->title(__('app.warning'))
-//             ->body(__('app.exists_before'))
-//             ->danger()
-//             ->send();
+    //     $article = static::getModel()::create($data);
 
-//         // Optionally, you can prevent form submission here by returning early
-//         return;
-//     }
 
-// }
+    //     event(new ArticlePublished($article));
+
+    //     return $article;
+    // }
+
 }

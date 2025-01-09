@@ -5,10 +5,23 @@
 @endphp
 
     <meta charset="utf-8">
-    <title>ARP</title>
+    {{-- <title>ARP</title> --}}
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="ARP" name="keywords">
     <meta content="ARP" name="description">
+{{-- Meta --}}
+
+    <meta name="description" content="@yield('meta_description',  \Str::limit(strip_tags(@$setting->headerTitle), 160)  )">
+    <meta property="og:title" content="@yield('og_title',@$setting->sitename .' | '. trans("main.Home"))">
+    <meta property="og:description" content="@yield('og_description',  \Str::limit(strip_tags(@$setting->headerSubtitle), 160)  )">
+    <meta property="og:image" content="@yield('og_image', asset('storage/' . @$setting->logo))">
+    {{-- <meta property="og:url" content="@yield('og_url', '{{ url()->current() }}')"> --}}
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="@yield('og_type', 'Website')">
+    <title>@yield('title', @$setting->sitename .' | ' . trans("main.Home"))</title>
+
+
+
 
     <!-- Favicon -->
     <link rel="icon" type="image" href="{{ asset('storage/' . @$setting->favicon) }}">
@@ -31,8 +44,10 @@
     <link href="{{asset('assets/css/bootstrap.rtl.min.css')}}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link rel="stylesheet" href="assets/css/icons.css')}}">
-    <link href="assets/css/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('assets/css/icons.css')}}">
+    <link href="{{asset('assets/css/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

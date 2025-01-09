@@ -12,6 +12,7 @@ class ExpertArticleController extends Controller
     public function index()
     {
         $expertArticle = ExpertArticle::with('expert')->get();
+        // return $expertArticle;
         $topViews      = ExpertArticle::orderBy('views', 'desc')->take(3)->get();
         return view('pages.ExpertArticle.expertArticle',compact('expertArticle','topViews'));
     }
@@ -20,6 +21,7 @@ class ExpertArticleController extends Controller
 
     public function show(ExpertArticle $expertArticleDetails)
     {
+        // return $expertArticleDetails;
         $expertArticleDetails->increment('views');
 
         $relatedArticles = ExpertArticle::where('expert_id', $expertArticleDetails->expert_id)

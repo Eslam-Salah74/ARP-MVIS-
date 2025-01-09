@@ -1,4 +1,38 @@
 @extends('layouts.app')
+@php
+    $setting = getsettings();
+@endphp
+@if (@$categoryTeams)
+
+    @section('meta_description')
+        {!! \Str::limit(strip_tags(@$categoryTeams[0]->name), 160) !!}
+    @endsection
+
+@endif
+
+@if ($setting && $setting->sitename != null)
+    @section('og_title', @$setting->sitename . ' | ' . trans('main.Our Team'))
+@endif
+
+@if (@$categoryTeams)
+    @section('og_description')
+        {{ \Str::limit(strip_tags(@$categoryTeams[0]->name), 160) }}
+    @endsection
+@endif
+
+@if (!empty($categoryTeams) && isset($categoryTeams[0]) && isset($categoryTeams[0]->team[1]))
+    @section('og_image')
+        {{ request()->root() . '/storage/' . $categoryTeams[0]->team[0]['image'] }}
+    @endsection
+@endif
+
+@section('og_url', url()->current())
+
+@section('og_type', 'website')
+
+@if ($setting && $setting->sitename != null)
+    @section('title', @$setting->sitename . ' | ' .trans('main.Our Team'))
+@endif
 
 @section('content')
 

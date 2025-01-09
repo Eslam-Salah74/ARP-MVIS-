@@ -1,12 +1,51 @@
 @extends('layouts.app')
 
+
+@php
+    $setting = getsettings();
+@endphp
+{{-- @if (@$contact)
+
+    @section('meta_description')
+        {!! \Str::limit(strip_tags(@$contact->address[0]['address']), 160) !!}
+    @endsection
+
+@endif --}}
+
+@if ($setting && $setting->sitename != null)
+    @section('og_title', @$setting->sitename . ' | ' .trans('main.Contact Us'))
+@endif
+
+{{-- @if (@$contact)
+    @section('og_description')
+        {{ \Str::limit(strip_tags(@$contact->address[0]['address']), 160) }}
+    @endsection
+@endif --}}
+
+{{-- @if (@$contact)
+    @section('og_image')
+        {{ request()->root() . '/storage/' . $contact[0]->team[0]['image'] }}
+    @endsection
+@endif --}}
+
+@section('og_url', url()->current())
+
+@section('og_type', 'website')
+
+@if ($setting && $setting->sitename != null)
+    @section('title', @$setting->sitename . ' | ' . trans('main.Contact Us') )
+@endif
+
+
+
+
 @section('content')
 
     <div class="container-xxl mx-auto px-lg-5 px-3 justify-content-center  my-5">
         <div class=" row  gap-0  single-opinion">
             <div class="d-flex gap-2 align-items-center py-2 ">
                 <h2 class="main-headers  mb-2 py-0">
-                    تواصل معنا
+                    {{ trans('main.Contact Us') }}
                 </h2>
             </div>
 
@@ -16,7 +55,8 @@
                         <img class="contact-icon " src="{{ asset('assets/img/icons/phone.svg') }}" alt="">
                     </div>
                     <div class="special-links">
-                        <a class="side-card-title  mb-0 special-p">الهاتف
+                        <a class="side-card-title  mb-0 special-p">
+                            {{ trans('main.Phone') }}
                         </a>
                         @if (@$contact)
                             @foreach ($contact->phone as $phone)
@@ -36,7 +76,7 @@
                     </div>
                     <div class="special-links">
                         <a class="side-card-title sub-titles  mb-0 special-p">
-                            العنوان
+                            {{ trans('main.Address') }}
                         </a>
                         @if (@$contact)
                             @foreach ($contact->address as $address)
@@ -62,7 +102,7 @@
                     </div>
                     <div class="special-links">
                         <a class="side-card-title  mb-0 special-p">
-                            الموقع الإلكتروني
+                           {{ trans('main.Email') }}
                         </a>
                         @if (@$contact)
                             @foreach ($contact->email as $email)
@@ -79,7 +119,8 @@
         </div>
         <div class="container-fluid justify-content-center row gap-0 col-lg-12 single-opinion">
             <div class="d-flex gap-2 align-items-center py-2 master-title">
-                <h2 class="main-headers  mb-2 py-0">الموقع
+                <h2 class="main-headers  mb-2 py-0">
+                    {{ trans('main.Location') }}
                 </h2>
             </div>
 
